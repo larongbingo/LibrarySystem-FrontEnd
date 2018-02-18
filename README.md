@@ -1,3 +1,10 @@
+* NodeJS(Server Language)
+  * React (Front End Framework)
+    * React Router v4 (Routing)
+    * React Bootstrap (Bootstrap Components)
+  * Axios (Fetching and Sending Data)
+  * Serve (Serving Static Files)
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
