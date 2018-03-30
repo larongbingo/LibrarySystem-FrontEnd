@@ -28,8 +28,8 @@ class AppNavbar extends Component {
               {
                   // Check if the localStorage has a stored hash
                   (this.checkToken()) ?
-                  <NavItem eventKey={1} href="/login">Log Out</NavItem> :
-                  <NavItem eventKey={2} href="/logout">Log In</NavItem> 
+                  <NavItem eventKey={1} href="/logout">Log Out</NavItem> :
+                  <NavItem eventKey={2} href="/login">Log In</NavItem> 
               }
             </Nav>
           </Navbar.Collapse>
