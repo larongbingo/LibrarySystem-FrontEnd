@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { 
     Form,
     FormGroup, 
@@ -12,9 +13,10 @@ class BookSearchForm extends Component {
         super(props, context);
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleEnterKeyPress = this.handleEnterKeyPress.bind(this);
 
         this.state = {
-            value: ""
+            value: this.props.value
         }
     }
 
@@ -24,9 +26,19 @@ class BookSearchForm extends Component {
         })
     }
 
+    handleEnterKeyPress(e) {
+        if(e.key === "Enter") {
+            // At Keypress of enter, redirect to /bookCatalog/ + this.state.value
+            e.preventDefault();
+            return (
+                <Redirect to={"/bookCatalog/" + this.state.value} />
+            )
+        }
+    }
+
     render() {
         return (
-            <Form horizontal>
+            <Form horizontal onKeyPress={this.handleEnterKeyPress}>
                 <FormGroup controlId="searchBook">
                     <Col md={8}>
                         <FormControl 

@@ -16,7 +16,7 @@ class Homepage extends Component {
                             </p>
                             <br />
                             <p>
-                                <BookSearchForm />
+                                <BookSearchForm value="" />
                             </p>
                         </Jumbotron>
                     </Col>
