@@ -37,7 +37,7 @@ class BookCatalog extends Component {
             console.log(this.state.bookDetails);
             return (
                 <Grid>
-                    <BookSearchForm />
+                    <BookSearchForm value={this.props.match.params.bookName} />
                     <Row>
                         <Col xs={12}>
                             { this.state.bookDetails.map(this.renderBookDetails) }
@@ -50,7 +50,7 @@ class BookCatalog extends Component {
         // Render temporary component
         return (
             <Grid>
-                <BookSearchForm />
+                <BookSearchForm value={this.props.match.params.bookName} />
                 <Row>
                     <Col>
                         <h3>Loading...</h3>
