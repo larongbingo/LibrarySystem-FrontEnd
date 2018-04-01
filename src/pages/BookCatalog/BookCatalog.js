@@ -9,8 +9,8 @@ class BookCatalog extends Component {
     componentDidMount() {
         let bookName = this.props.match.params.bookName;
         let url = (bookName) ? 
-            'http://librarysystembackend.mybluemix.net/api/?query={Books(title:"' + bookName + '"){id title author}}' : 
-            "http://librarysystembackend.mybluemix.net/api/?query={Books{id title author}}"
+            'https://librarysystembackend.mybluemix.net/api/?query={Books(title:"' + bookName + '"){id title author}}' : 
+            "https://librarysystembackend.mybluemix.net/api/?query={Books{id title author}}"
 
         fetch(url)
         .then(response => {
