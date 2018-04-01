@@ -12,7 +12,8 @@ class Homepage extends Component {
                             <h1>CvSU - Imus Library Web Portal</h1>
                             <p>
                                 An application to allow our students to access our available books
-                                and thesis titles.
+                                and thesis titles. 
+                                All of the designs here are temporary
                             </p>
                             <br />
                             <p>
