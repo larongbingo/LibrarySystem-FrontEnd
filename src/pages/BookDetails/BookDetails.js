@@ -10,7 +10,6 @@ class BookDetails extends Component {
         fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             this.setState({bookDetails: data.data.Books[0]})
         });
     }
