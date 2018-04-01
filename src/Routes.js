@@ -6,11 +6,13 @@ import BookCatalog from "./pages/BookCatalog/BookCatalog";
 import Dissertation from "./pages/Dissertation/Dissertation";
 import BookDetails from "./pages/BookDetails/BookDetails";
 import LogIn from "./pages/LogIn/LogIn";
+import About from "./pages/About/About";
 
 class Routes extends Component {
     render() {
         return (
             <Switch>
+                <Route path="/about" component={ About } />
                 <Route path="/login" component={ LogIn } />
                 <Route exact path="/book/:bookId" component={ BookDetails } />
                 <Route path="/bookCatalog/:bookName" component={ BookCatalog } />
