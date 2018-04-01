@@ -25,7 +25,7 @@ class BookCatalog extends Component {
     renderBookDetails(book) {
         return (
             // Add info if the book is reserved or borrowed
-            <Link to={"/book/" + book.id}>
+            <Link to={"/book/" + book.id} key={book.id}>
                 <h4>{ book.title }</h4>
                 <h5>{ book.author }</h5>
             </Link>
