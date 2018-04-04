@@ -6,6 +6,7 @@ import {
     Col,
     Button
 } from "react-bootstrap";
+import "./BookSearchForm_Styles.css";
 
 class BookSearchForm extends Component {
     constructor(props, context) {
@@ -38,7 +39,7 @@ class BookSearchForm extends Component {
             <Form horizontal onKeyPress={this.handleEnterKeyPress}>
                 <FormGroup controlId="searchBook">
                     <Col mdOffset={1} xs={12}>
-                        <Col md={8}>
+                        <Col md={8} className={"padding-top-30"}>
                             <FormControl 
                                 type="text"
                                 value={this.state.value}
@@ -48,7 +49,7 @@ class BookSearchForm extends Component {
                             <FormControl.Feedback />
                         </Col>
                         
-                        <Col md={4}>
+                        <Col md={4} className={"padding-top-30"}>
                             <Button 
                                 href={"/bookCatalog/" + this.state.value} 
                                 type="submit" 
