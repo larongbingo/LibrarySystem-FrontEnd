@@ -3,7 +3,6 @@ import {
     Form,
     FormGroup, 
     FormControl, 
-    Col,
     Button,
     InputGroup
 } from "react-bootstrap";
