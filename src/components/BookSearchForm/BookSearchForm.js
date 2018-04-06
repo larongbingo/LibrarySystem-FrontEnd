@@ -4,7 +4,8 @@ import {
     FormGroup, 
     FormControl, 
     Col,
-    Button
+    Button,
+    InputGroup
 } from "react-bootstrap";
 import "./BookSearchForm_Styles.css";
 
@@ -37,26 +38,21 @@ class BookSearchForm extends Component {
     render() {
         return (
             <Form horizontal onKeyPress={this.handleEnterKeyPress}>
-                <FormGroup controlId="searchBook">
-                    <Col mdOffset={1} xs={12}>
-                        <Col md={8} className={"padding-top-30"}>
-                            <FormControl 
-                                type="text"
-                                value={this.state.value}
-                                placeholder="Search Book here. Enter a title. Ex. Discrete Mathematics"
-                                onChange={this.handleChange}
-                            />
-                            <FormControl.Feedback />
-                        </Col>
-                        
-                        <Col md={4} className={"padding-top-30"}>
-                            <Button 
+                <FormGroup className="padding-top-30">
+                    <InputGroup>
+                        <FormControl 
+                            type="text"
+                            value={this.state.value}
+                            placeholder="Enter a title. Ex. Discrete Mathematics"
+                            onChange={this.handleChange} 
+                        />
+                        <InputGroup.Button>
+                            <Button
                                 href={"/bookCatalog/" + this.state.value} 
-                                type="submit" 
                                 bsStyle="success"
                             >Search Book</Button>
-                        </Col>
-                    </Col>
+                        </InputGroup.Button>
+                    </InputGroup>
                 </FormGroup>
             </Form>
         )
