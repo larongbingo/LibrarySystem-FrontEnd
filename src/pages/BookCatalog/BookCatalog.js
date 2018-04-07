@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Grid, Row, Col } from "react-bootstrap";
+import { Grid, Row, Col, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import BookSearchForm from "../../components/BookSearchForm/BookSearchForm";
+
+import QuestionMark from "./question-512.png";
 
 class BookCatalog extends Component {
     state = {};
@@ -25,10 +27,17 @@ class BookCatalog extends Component {
     renderBookDetails(book) {
         return (
             // Add info if the book is reserved or borrowed
-            <Link to={"/book/" + book.id} key={book.id}>
-                <h4>{ book.title }</h4>
-                <h5>{ book.author }</h5>
-            </Link>
+            <Row>
+                <Link to={"/book/" + book.id}>
+                    <Col md={2}>
+                        <Image responsive src={QuestionMark} />
+                    </Col>
+                    <Col md={10}>
+                        <h4>{book.title}</h4>
+                        <h5>{book.author}</h5>
+                    </Col>
+                </Link>
+            </Row>
         )
     }
 
@@ -38,11 +47,7 @@ class BookCatalog extends Component {
             return (
                 <Grid>
                     <BookSearchForm value={this.props.match.params.bookName} />
-                    <Row>
-                        <Col xs={12}>
-                            { this.state.bookDetails.map(this.renderBookDetails) }
-                        </Col>
-                    </Row>
+                    { this.state.bookDetails.map(this.renderBookDetails) }
                 </Grid>
             )
         }

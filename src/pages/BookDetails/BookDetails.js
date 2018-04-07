@@ -27,6 +27,7 @@ class BookDetails extends Component {
                                 <h4>ISBN: {book.ISBN}</h4>
                                 <h4>Borrowed: { (book.isBorrowed) ? "Yes" : "No" }</h4>
                                 <h4>Reserved: { (book.userId) ? "Yes" : "No" }</h4>
+                                <p>Reserve buttons coming soon...</p>
                             </div>
                         </Col>
                     </Row>

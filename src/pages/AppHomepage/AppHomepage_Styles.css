@@ -1,0 +1,24 @@
+.black-background {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: black;
+}
+
+.float {
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.text-padding {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.pic-padding {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

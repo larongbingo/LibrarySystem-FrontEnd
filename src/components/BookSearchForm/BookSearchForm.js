@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import { 
     Form,
     FormGroup, 
     FormControl, 
-    Col,
-    Button
+    Button,
+    InputGroup
 } from "react-bootstrap";
+import "./BookSearchForm_Styles.css";
 
 class BookSearchForm extends Component {
     constructor(props, context) {
@@ -30,33 +30,28 @@ class BookSearchForm extends Component {
         if(e.key === "Enter") {
             // At Keypress of enter, redirect to /bookCatalog/ + this.state.value
             e.preventDefault();
-            return (
-                <Redirect to={"/bookCatalog/" + this.state.value} />
-            )
+            window.location.replace("/bookCatalog/" + this.state.value);
         }
     }
 
     render() {
         return (
             <Form horizontal onKeyPress={this.handleEnterKeyPress}>
-                <FormGroup controlId="searchBook">
-                    <Col md={8}>
+                <FormGroup className="padding-top-30">
+                    <InputGroup>
                         <FormControl 
                             type="text"
                             value={this.state.value}
-                            placeholder="Search Book here. Enter a title. Ex. Discrete Mathematics"
-                            onChange={this.handleChange}
+                            placeholder="Enter a title. Ex. Discrete Mathematics"
+                            onChange={this.handleChange} 
                         />
-                        <FormControl.Feedback />
-                    </Col>
-                    
-                    <Col md={4}>
-                        <Button 
-                            href={"/bookCatalog/" + this.state.value} 
-                            type="submit" 
-                            bsStyle="success"
-                        >Search Book</Button>
-                    </Col>
+                        <InputGroup.Button>
+                            <Button
+                                href={"/bookCatalog/" + this.state.value} 
+                                bsStyle="success"
+                            >Search Book</Button>
+                        </InputGroup.Button>
+                    </InputGroup>
                 </FormGroup>
             </Form>
         )
