@@ -32,10 +32,10 @@ class BookCatalog extends Component {
             // Add info if the book is reserved or borrowed
             <Link to={"/book/" + book.id}>
                 <Row className={"entry-padding"}>
-                    <Col md={2}>
+                    <Col xs={2}>
                         <Image responsive src={QuestionMark} />
                     </Col>
-                    <Col md={10}>
+                    <Col xs={10}>
                         <h4>{book.title}</h4>
                         <h5>{book.author}</h5>
                     </Col>
