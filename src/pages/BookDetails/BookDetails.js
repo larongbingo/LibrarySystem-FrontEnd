@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Grid, Row, Col } from "react-bootstrap";
+import { Grid, Row, Col, Image } from "react-bootstrap";
+
+import QuestionMark from "./question-512.png";
 
 class BookDetails extends Component {
     state = {};
@@ -20,7 +22,10 @@ class BookDetails extends Component {
             return (
                 <Grid>
                     <Row>
-                        <Col xs={12}>
+                        <Col md={4}>
+                            <Image responsive src={QuestionMark} />
+                        </Col>
+                        <Col md={8}>
                             <div>
                                 <h3>Title: {book.title}</h3>
                                 <h3>Author: {book.author}</h3>
