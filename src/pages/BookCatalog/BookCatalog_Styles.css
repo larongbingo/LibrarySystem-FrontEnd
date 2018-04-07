@@ -2,3 +2,8 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+.entry-padding:hover {
+    background-color: #c0c0c0;
+    color: black;
+}
