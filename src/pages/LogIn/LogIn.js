@@ -9,6 +9,7 @@ import {
     Row,
     Col
 } from "react-bootstrap";
+import AlertDismissable from "../../components/AlertDismissable/AlertDismissable";
 
 class AppLogin extends Component {
     constructor(props, context) {
@@ -21,7 +22,8 @@ class AppLogin extends Component {
 
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            showAlert: false
         };
     }    
     
@@ -62,6 +64,7 @@ class AppLogin extends Component {
             }
             else {
                 // Show a closable alert about invalid creds
+                this.setState({showAlert: true});
             }
         })
     }
@@ -69,6 +72,11 @@ class AppLogin extends Component {
     render() {
         return (
             <div>
+                {
+                    (this.state.showAlert) ? 
+                    <AlertDismissable bsStyle={"warning"} title={"Invalid Credentials"} message={"Please check your username or password"} /> : 
+                    ""
+                }
                 <Grid>
                     <Row>
                         <Col mdOffset={2} md={8} xs={12}>
