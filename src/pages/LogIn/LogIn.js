@@ -54,7 +54,6 @@ class AppLogin extends Component {
         .then(response => {
             // if the request sends a success
             if(response.data.logIn.success) {
-                console.log(response.data.logIn.data.token);
                 // Store the hash
                 localStorage.setItem("hash", response.data.logIn.data.token);
 
@@ -64,8 +63,6 @@ class AppLogin extends Component {
             else {
                 // Show a closable alert about invalid creds
             }
-
-                
         })
     }
 
