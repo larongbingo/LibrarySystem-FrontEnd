@@ -8,6 +8,7 @@ import BookDetails from "./pages/BookDetails/BookDetails";
 import LogIn from "./pages/LogIn/LogIn";
 import About from "./pages/About/About";
 import Register from "./pages/Register/Register";
+import LogOut from "./pages/Logout/LogOut";
 
 class Routes extends Component {
     render() {
@@ -15,6 +16,7 @@ class Routes extends Component {
             <Switch>
                 <Route path="/register" component={ Register } />
                 <Route path="/about" component={ About } />
+                <Route path="/logout" component={ LogOut } />
                 <Route path="/login" component={ LogIn } />
                 <Route exact path="/book/:bookId" component={ BookDetails } />
                 <Route path="/bookCatalog/:bookName" component={ BookCatalog } />

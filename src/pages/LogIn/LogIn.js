@@ -16,13 +16,13 @@ class AppLogin extends Component {
 
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.handleLogInButtonClick = this.handleLogInButtonClick.bind(this);
+        this.handleEnterKeyPress = this.handleEnterKeyPress.bind(this);
 
         this.state = {
             username: "",
             password: ""
         };
-
-        console.log(props);
     }    
     
     handleUsernameChange(e) {
@@ -31,6 +31,42 @@ class AppLogin extends Component {
 
     handlePasswordChange(e) {
         this.setState({ password: e.target.value });
+    }
+
+    handleLogInButtonClick(e) {
+        this.sendLogInRequest(this.state.username, this.state.password);
+    }
+
+    handleEnterKeyPress(e) {
+        if(e.key === "Enter") {
+            this.sendLogInRequest(this.state.username, this.state.password);
+        }
+    }
+
+    sendLogInRequest(username, password) {
+        console.log("login");
+
+        // Send the request
+        fetch(`https://librarysystembackend.mybluemix.net/api?query=mutation+{logIn(username: "${this.state.username}", password: "${this.state.password}")}`, {method: "POST"})
+        .then(response => {
+            return response.json();
+        })
+        .then(response => {
+            // if the request sends a success
+            if(response.data.logIn.success) {
+                console.log(response.data.logIn.data.token);
+                // Store the hash
+                localStorage.setItem("hash", response.data.logIn.data.token);
+
+                // Redirect to homepage
+                window.location.replace("/");
+            }
+            else {
+                // Show a closable alert about invalid creds
+            }
+
+                
+        })
     }
 
     render() {
@@ -46,6 +82,7 @@ class AppLogin extends Component {
                                     value={this.state.username}
                                     placeholder="Username"
                                     onChange={this.handleUsernameChange}
+                                    onKeyPress={this.handleEnterKeyPress}
                                 />
 
                                 <ControlLabel>Password</ControlLabel>
@@ -54,8 +91,12 @@ class AppLogin extends Component {
                                     value={this.state.password}
                                     placeholder="Password"
                                     onChange={this.handlePasswordChange}
+                                    onKeyPress={this.handleEnterKeyPress}
                                 />
-                                <Button bsStyle="success">Log In</Button>
+                                <Button 
+                                    bsStyle="success"
+                                    onClick={this.handleLogInButtonClick}
+                                >Log In</Button>
                             </Form>
                             <Link to="/register">Don't have an account? Register with your School ID</Link>
                         </Col>
