@@ -72,12 +72,20 @@ class AppLogin extends Component {
     render() {
         return (
             <div>
-                {
-                    (this.state.showAlert) ? 
-                    <AlertDismissable bsStyle={"warning"} title={"Invalid Credentials"} message={"Please check your username or password"} /> : 
-                    ""
-                }
                 <Grid>
+                    {
+                        (this.state.showAlert) ? 
+                            <Row>
+                                <Col mdOffset={2} md={8}>
+                                    <AlertDismissable 
+                                        bsStyle={"danger"} 
+                                        title={"Invalid Credentials"} 
+                                        message={"Please check your username or password"} 
+                                    />
+                                </Col>
+                            </Row> 
+                            : ""
+                    }
                     <Row>
                         <Col mdOffset={2} md={8} xs={12}>
                             <Form>
