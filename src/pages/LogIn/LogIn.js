@@ -59,6 +59,9 @@ class AppLogin extends Component {
                 // Store the hash
                 localStorage.setItem("hash", response.data.logIn.data.token);
 
+                // Store the position
+                localStorage.setItem("position", response.data.logIn.data.position);
+
                 // Redirect to homepage
                 window.location.replace("/");
             }
