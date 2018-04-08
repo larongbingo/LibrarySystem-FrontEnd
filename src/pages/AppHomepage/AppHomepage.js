@@ -87,15 +87,15 @@ class Announcements extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col md={4}>
+                        <Col className={"min-body"} md={4}>
                             <h4>Web Portal is now up and running</h4>
                             <h5>Students can now read dissertations and reserve books</h5>
                         </Col>
-                        <Col md={4}>
+                        <Col className={"min-body"} md={4}>
                             <h4>Web Portal is now up and running</h4>
                             <h5>Students can now read dissertations and reserve books</h5>
                         </Col>
-                        <Col md={4}>
+                        <Col className={"min-body"} md={4}>
                             <h4>Web Portal is now up and running</h4>
                             <h5>Students can now read dissertations and reserve books</h5>
                         </Col>

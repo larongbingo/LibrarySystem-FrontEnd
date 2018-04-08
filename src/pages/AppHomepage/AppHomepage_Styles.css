@@ -22,3 +22,7 @@
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+.min-body {
+    min-height: 15em;
+}
