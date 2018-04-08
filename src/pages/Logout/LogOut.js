@@ -10,6 +10,9 @@ class LogOut extends Component {
         
         // Remove the locally stored token
         localStorage.removeItem("hash");
+
+        // Remove the locally stored position
+        localStorage.removeItem("position");
     }
     
     render() {
