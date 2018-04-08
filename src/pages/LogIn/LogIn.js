@@ -73,14 +73,14 @@ class AppLogin extends Component {
         return (
             <div>
                 <Grid>
-                    {
+                    { // Shows an alert if the given credentials is invalid
                         (this.state.showAlert) ? 
                             <Row>
                                 <Col mdOffset={2} md={8}>
                                     <AlertDismissable 
                                         bsStyle={"danger"} 
                                         title={"Invalid Credentials"} 
-                                        message={"Please check your username or password"} 
+                                        message={"Please check your username or password. Please go to your admin to restore password."} 
                                     />
                                 </Col>
                             </Row> 
