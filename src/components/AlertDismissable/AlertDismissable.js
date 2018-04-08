@@ -27,7 +27,7 @@ class AlertDismissable extends Component {
                 <Alert bsStyle={this.props.bsStyle} onDismiss={this.handleDismiss}>
                     <h3>{this.props.title}</h3>
                     <p>{this.props.message}</p>
-                    <Button onClick={this.handleDismiss}>Hide Alert</Button>
+                    <Button bsStyle={"info"} onClick={this.handleDismiss}>Hide Alert</Button>
                 </Alert>
             )
         }
