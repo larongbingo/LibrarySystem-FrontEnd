@@ -9,11 +9,17 @@ import LogIn from "./pages/LogIn/LogIn";
 import About from "./pages/About/About";
 import Register from "./pages/Register/Register";
 import LogOut from "./pages/Logout/LogOut";
+import BookStats from "./pages/BookStats/BookStats";
+import UpdateUsers from "./pages/UpdateUsers/UpdateUsers";
+import MarkBooks from "./pages/MarkBooks/MarkBooks";
 
 class Routes extends Component {
     render() {
         return (
             <Switch>
+                <Route path="/markBooks" component={ MarkBooks } />
+                <Route path="/updateUsers" component={ UpdateUsers } />
+                <Route path="/bookStats" component={ BookStats } />
                 <Route path="/register" component={ Register } />
                 <Route path="/about" component={ About } />
                 <Route path="/logout" component={ LogOut } />
