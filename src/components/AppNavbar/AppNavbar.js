@@ -4,7 +4,7 @@ import { Navbar, Nav, NavItem } from "react-bootstrap";
 class AppNavbar extends Component {
 
     checkToken() {
-        return localStorage.getItem("token");
+        return localStorage.getItem("hash");
     }
 
   render() {

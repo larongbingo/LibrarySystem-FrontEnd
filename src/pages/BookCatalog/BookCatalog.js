@@ -3,6 +3,8 @@ import { Grid, Row, Col, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import BookSearchForm from "../../components/BookSearchForm/BookSearchForm";
 
+import "./BookCatalog_Styles.css";
+
 import QuestionMark from "./question-512.png";
 
 class BookCatalog extends Component {
@@ -19,6 +21,7 @@ class BookCatalog extends Component {
             return response.json();
         })
         .then((response) => {
+
             this.setState({bookDetails: response.data.Books});
         });
     }
@@ -27,17 +30,17 @@ class BookCatalog extends Component {
     renderBookDetails(book) {
         return (
             // Add info if the book is reserved or borrowed
-            <Row>
-                <Link to={"/book/" + book.id}>
-                    <Col md={2}>
+            <Link to={"/book/" + book.id}>
+                <Row className={"entry-padding"}>
+                    <Col xs={2}>
                         <Image responsive src={QuestionMark} />
                     </Col>
-                    <Col md={10}>
+                    <Col xs={10}>
                         <h4>{book.title}</h4>
                         <h5>{book.author}</h5>
                     </Col>
-                </Link>
-            </Row>
+                </Row>
+            </Link>
         )
     }
 
