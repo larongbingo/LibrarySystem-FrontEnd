@@ -37,7 +37,7 @@ class AppNavbar extends Component {
             </Nav>
             <Nav pullRight>
               {
-                this.checkPosition() !== "USER" ?
+                this.checkPosition() !== "USER" && this.checkToken() ?
                 <NavDropdown title="Administration">
                 {
                   (this.checkPosition() === "ADMINISTRATOR") ? 
