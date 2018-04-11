@@ -6,8 +6,10 @@ import {
     Button,
     Form,
     Grid,
+    Row,
     Col
 } from "react-bootstrap";
+import AlertDismissable from "../../components/AlertDismissable/AlertDismissable";
 
 import "./Register_Styles.css";
 
@@ -22,6 +24,8 @@ class Register extends Component {
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(this);
+        this.onAlertDismiss = this.onAlertDismiss.bind(this);
+        this.sendData = this.sendData.bind(this);
 
         this.state = {
             firstName: "",
@@ -29,29 +33,34 @@ class Register extends Component {
             schoolID: "",
             username: "",
             password: "",
-            confirmPassword: ""
+            confirmPassword: "",
+            show: false
         }
     }
 
     handleEnterKeyPress(e) {
         if(e.key === "Enter") {
             e.preventDefault();
-            
-            if(this.state.password !== this.state.confirmPassword) {
-                return;
-            }
-
-            let url = "https://librarysystembackend.mybluemix.net/api";
-
-            fetch(`${url}?query=mutation+{addUser(firstName:"${this.state.firstName}",lastName:"${this.state.lastName}",userID:"${this.state.schoolID}",username:"${this.state.username}",password:"${this.state.password}")}`, {method: "POST"})
-            .then(response => {
-                return response.json();
-            })
-            .then(response => {
-                console.log(response);
-                window.location.replace("/");
-            })
+            this.sendData();
         }
+    }
+
+    sendData() {
+        if(this.state.password !== this.state.confirmPassword) {
+            this.setState({show: true});
+            return;
+        }
+
+        let url = "https://librarysystembackend.mybluemix.net/api";
+
+        fetch(`${url}?query=mutation+{addUser(firstName:"${this.state.firstName}",lastName:"${this.state.lastName}",userID:"${this.state.schoolID}",username:"${this.state.username}",password:"${this.state.password}")}`, {method: "POST"})
+        .then(response => {
+            return response.json();
+        })
+        .then(response => {
+            console.log(response);
+            window.location.replace("/");
+        })
     }
 
     handleFirstNameChange(e) {
@@ -78,12 +87,35 @@ class Register extends Component {
         this.setState({confirmPassword: e.target.value});
     }
 
+    handleButtonClick(e) {
+        e.preventDefault();
+        this.sendData();
+    } 
+
+    onAlertDismiss() {
+        this.setState({show: true});
+    }
     
     // TODO: ADD VALIDATION ON EMPTY FIELDS
 
     render() {
         return (
             <Grid className="padding-form">
+                {
+                    this.state.show ? 
+                    <Row>
+                        <Col xs={12}>
+                            <AlertDismissable 
+                                bsStyle="danger"
+                                title="Incorrect Password"
+                                message="Please check the password if its the same"
+                                show={this.state.show}
+                                onDismiss={this.onAlertDismiss}
+                            />
+                        </Col>
+                    </Row> :
+                    ""
+                }
                 <Form horizontal onKeyPress={this.handleEnterKeyPress}>
                     <FormGroup controlId="firstName">
                         <Col componentClass={ControlLabel} sm={2}>First Name</Col>
@@ -141,13 +173,13 @@ class Register extends Component {
                             <FormControl 
                                 type="password" 
                                 placeholder="Password"
-                                onChange={this.handlePasswordChange}
+                                onChange={this.handleConfirmPasswordChange}
                             />
                         </Col>
                     </FormGroup>
                     <FormGroup>
                         <Col smOffset={2} sm={10}>
-                            <Button type="submit">Register</Button>
+                            <Button onClick={this.sendData}>Register</Button>
                         </Col>
                     </FormGroup>
                 </Form>
