@@ -8,13 +8,16 @@ class AlertDismissable extends Component {
         this.handleDismiss = this.handleDismiss.bind(this);
         this.handleShow = this.handleShow.bind(this);
 
+        console.log(this.props);
+
         this.state = {
-            show: true
-        };
+            show: this.props.show
+        }
     }
 
     handleDismiss() {
         this.setState({show: false});
+        this.props.onDismiss();
     }
 
     handleShow() {
@@ -32,7 +35,7 @@ class AlertDismissable extends Component {
             )
         }
 
-        return <span></span>
+        return ""
     }
 }
 

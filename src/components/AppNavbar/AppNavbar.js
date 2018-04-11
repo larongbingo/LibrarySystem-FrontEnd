@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem } from "react-bootstrap";
+import { 
+  Navbar, 
+  Nav, 
+  NavItem,
+  NavDropdown,
+  MenuItem 
+} from "react-bootstrap";
 
 class AppNavbar extends Component {
 
     checkToken() {
         return localStorage.getItem("hash");
+    }
+
+    // TODO: Implement
+    checkPosition() {
+      return localStorage.getItem("position");
     }
 
   render() {
@@ -25,6 +36,36 @@ class AppNavbar extends Component {
               <NavItem eventKey={4} href="/about">About</NavItem>
             </Nav>
             <Nav pullRight>
+              {
+                this.checkPosition() !== "USER" && this.checkToken() ?
+                <NavItem href="/uploadDissertation">Upload Thesis</NavItem> :
+                ""
+              }
+
+              {
+                this.checkPosition() !== "USER" && this.checkToken() ?
+                <NavDropdown title="Administration">
+                {
+                  (this.checkPosition() === "ADMINISTRATOR") ? 
+                    <MenuItem href="/bookStats">Book Stats</MenuItem> :
+                    ""
+                }
+                
+                {
+                  (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
+                    <MenuItem href="/updateUsers">Update Users</MenuItem> :
+                    ""
+                }
+
+                {
+                  (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
+                    <MenuItem href="/markBooks">Mark Books</MenuItem> :
+                    ""
+                }
+                </NavDropdown> 
+                : ""
+              }
+
               {
                   // Check if the localStorage has a stored hash
                   (this.checkToken()) ?
