@@ -21,27 +21,35 @@ class Register extends Component {
         this.handleSchoolIDChange = this.handleSchoolIDChange.bind(this);
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(this);
 
         this.state = {
             firstName: "",
             lastName: "",
             schoolID: "",
             username: "",
-            password: ""
+            password: "",
+            confirmPassword: ""
         }
     }
 
     handleEnterKeyPress(e) {
         if(e.key === "Enter") {
             e.preventDefault();
-            console.log(this.state.username);
-            let url = "https://librarysystembackend.mybluemix.net/api"
+            
+            if(this.state.password !== this.state.confirmPassword) {
+                return;
+            }
+
+            let url = "https://librarysystembackend.mybluemix.net/api";
+
             fetch(`${url}?query=mutation+{addUser(firstName:"${this.state.firstName}",lastName:"${this.state.lastName}",userID:"${this.state.schoolID}",username:"${this.state.username}",password:"${this.state.password}")}`, {method: "POST"})
             .then(response => {
                 return response.json();
             })
             .then(response => {
                 console.log(response);
+                window.location.replace("/");
             })
         }
     }
@@ -64,6 +72,10 @@ class Register extends Component {
 
     handlePasswordChange(e) {
         this.setState({password: e.target.value});
+    }
+
+    handleConfirmPasswordChange(e) {
+        this.setState({confirmPassword: e.target.value});
     }
 
     
@@ -115,6 +127,16 @@ class Register extends Component {
                     </FormGroup>
                     <FormGroup controlId="password">
                         <Col componentClass={ControlLabel} sm={2}>Password</Col>
+                        <Col sm={10}>
+                            <FormControl 
+                                type="password" 
+                                placeholder="Password"
+                                onChange={this.handlePasswordChange}
+                            />
+                        </Col>
+                    </FormGroup>
+                    <FormGroup controlId="confirmPassword">
+                        <Col componentClass={ControlLabel} sm={2}>Confirm Password</Col>
                         <Col sm={10}>
                             <FormControl 
                                 type="password" 
