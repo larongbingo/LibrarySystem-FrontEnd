@@ -19,6 +19,7 @@ class AppLogin extends Component {
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleLogInButtonClick = this.handleLogInButtonClick.bind(this);
         this.handleEnterKeyPress = this.handleEnterKeyPress.bind(this);
+        this.onAlertDismiss = this.onAlertDismiss.bind(this);
 
         this.state = {
             username: "",
@@ -72,6 +73,10 @@ class AppLogin extends Component {
         })
     }
 
+    onAlertDismiss() {
+        this.setState({showAlert: false});
+    }
+
     render() {
         return (
             <div>
@@ -84,6 +89,8 @@ class AppLogin extends Component {
                                         bsStyle={"danger"} 
                                         title={"Invalid Credentials"} 
                                         message={"Please check your username or password. Please go to your admin to restore password."} 
+                                        show={this.state.showAlert}
+                                        onDismiss={this.onAlertDismiss}
                                     />
                                 </Col>
                             </Row> 
