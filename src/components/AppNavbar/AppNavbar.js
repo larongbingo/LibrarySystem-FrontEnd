@@ -38,6 +38,12 @@ class AppNavbar extends Component {
             <Nav pullRight>
               {
                 this.checkPosition() !== "USER" && this.checkToken() ?
+                <NavItem href="/uploadDissertation">Upload Thesis</NavItem> :
+                ""
+              }
+
+              {
+                this.checkPosition() !== "USER" && this.checkToken() ?
                 <NavDropdown title="Administration">
                 {
                   (this.checkPosition() === "ADMINISTRATOR") ? 
