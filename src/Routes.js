@@ -27,6 +27,7 @@ class Routes extends Component {
                 <Route exact path="/book/:bookId" component={ BookDetails } />
                 <Route path="/bookCatalog/:bookName" component={ BookCatalog } />
                 <Route path="/bookCatalog" component={ BookCatalog } />
+                <Route path="/dissertation/:dissertationName" component={ Dissertation } />
                 <Route path="/dissertation" component={ Dissertation } />
                 <Route path="/" component={ AppHomepage } />
             </Switch>
