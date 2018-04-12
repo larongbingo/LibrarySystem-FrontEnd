@@ -32,7 +32,7 @@ class AppAbout extends Component {
                             <li>Shifil Mantua - modelling for the Homepage</li>
                             <li>Noemi Estimo - modelling for the Homepage</li>
                             <li>Cherry Reyes - modelling for the Homepage</li>
-                            <li>Gab Yano - modelling for the Homepage</li>
+                            <li>Gab Yano - modelling for the Homepage and adding new ideas to the application</li>
                             <li>Daryl Valle - modelling for the Homepage</li>
                         </ul>                    
                     </Col>
