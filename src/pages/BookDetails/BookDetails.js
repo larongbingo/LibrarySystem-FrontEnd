@@ -15,7 +15,7 @@ class BookDetails extends Component {
     }
 
     componentDidMount() {
-        let url = 'https://librarysystembackend.mybluemix.net/api?query={Books(id:' + this.state.bookId + '){id title author ISBN isBorrowed userId}}';
+        let url = `https://librarysystembackend.mybluemix.net/api?query={Books(id:${this.state.bookId}){id title author ISBN isBorrowed userId}}`;
         fetch(url)
         .then(response => response.json())
         .then(data => {
