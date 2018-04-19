@@ -4,11 +4,18 @@ import { Grid, Row, Col, Image } from "react-bootstrap";
 import QuestionMark from "./question-512.png";
 
 class BookDetails extends Component {
-    state = {};
+    constructor(props, context) {
+        super(props, context);
+
+        this.state = {
+            bookId: this.props.match.params.bookId
+        };
+
+        fetch(`https://librarysystembackend.mybluemix.net/api?query=mutation+{updateViewCounter(bookId:${this.state.bookId})}`, {method: "POST"})
+    }
 
     componentDidMount() {
-        let bookId = this.props.match.params.bookId;
-        let url = 'http://librarysystembackend.mybluemix.net/api?query={Books(id:' + bookId + '){id title author ISBN isBorrowed userId}}';
+        let url = `https://librarysystembackend.mybluemix.net/api?query={Books(id:${this.state.bookId}){id title author ISBN isBorrowed userId}}`;
         fetch(url)
         .then(response => response.json())
         .then(data => {
