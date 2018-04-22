@@ -4,8 +4,13 @@ import {
   Nav, 
   NavItem,
   NavDropdown,
-  MenuItem 
+  MenuItem,
+  Image
 } from "react-bootstrap";
+
+import CvSU_Logo from "./Cavite_State_University.png";
+
+import "./AppNavbar_Styles.css";
 
 class AppNavbar extends Component {
 
@@ -13,7 +18,7 @@ class AppNavbar extends Component {
         return localStorage.getItem("hash");
     }
 
-    // TODO: Implement
+    // TODO: change the list at BookCatalog to Flexbox
     checkPosition() {
       return localStorage.getItem("position");
     }
@@ -24,15 +29,19 @@ class AppNavbar extends Component {
         <Navbar fixedTop inverse collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="/">CvSU - Imus Library</a>
+              <a href="/">
+                <Image className="logo" responsive src={CvSU_Logo} />
+              </a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
               <NavItem eventKey={1} href="/">Home</NavItem>
-              <NavItem eventKey={2} href="/bookCatalog">Book Catalog</NavItem>
-              <NavItem eventKey={3} href="/dissertation">Dissertation</NavItem>
+              <NavDropdown title="Catalogs">
+                <MenuItem eventKey={2} href="/bookCatalog">Book Catalog</MenuItem>
+                <MenuItem eventKey={3} href="/dissertation">Dissertation Catalog</MenuItem>
+              </NavDropdown>
               <NavItem eventKey={4} href="/about">About</NavItem>
             </Nav>
             <Nav pullRight>

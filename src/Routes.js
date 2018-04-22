@@ -12,11 +12,13 @@ import LogOut from "./pages/Logout/LogOut";
 import BookStats from "./pages/BookStats/BookStats";
 import UpdateUsers from "./pages/UpdateUsers/UpdateUsers";
 import MarkBooks from "./pages/MarkBooks/MarkBooks";
+import UploadThesis from "./pages/UploadThesis";
 
 class Routes extends Component {
     render() {
         return (
             <Switch>
+                <Route path="/uploadThesis" component={ UploadThesis } />
                 <Route path="/markBooks" component={ MarkBooks } />
                 <Route path="/updateUsers" component={ UpdateUsers } />
                 <Route path="/bookStats" component={ BookStats } />

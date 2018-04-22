@@ -21,6 +21,10 @@ class AppAbout extends Component {
                         <h4>Dev Team</h4>
                         <ul>
                             <li>Renz Christen Yeomer A. Pagulayan</li>
+                            <li>Michael Casals</li>
+                            <li>Mark Louie Cipriano</li>
+                            <li>Joshua Albert Villanueva</li>
+                            <li>Sache Aclan</li>
                         </ul>                    
                     </Col>
                 </Row>
