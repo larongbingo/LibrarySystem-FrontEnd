@@ -27,7 +27,7 @@ class BookStats extends Component {
                     <h4>Borrows Count: {bookView.borrows_count}</h4>
                     <h4>Returns Count: {bookView.returns_count}</h4>
                     <h4>Reserves Count: {bookView.reserves_count}</h4>
-                    <h4>Unreseres Count: {bookView.unreseres_count}</h4>
+                    <h4>Unreseres Count: {bookView.unreserves_count}</h4>
                 </Col>
             </Row>
         )
