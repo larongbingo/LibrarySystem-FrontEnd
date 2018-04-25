@@ -13,6 +13,7 @@ import BookStats from "./pages/BookStats/BookStats";
 import UpdateUsers from "./pages/UpdateUsers/UpdateUsers";
 import MarkBooks from "./pages/MarkBooks/MarkBooks";
 import UploadThesis from "./pages/UploadThesis";
+import Messages from "./pages/Message";
 
 class Routes extends Component {
     checkToken() {
@@ -47,6 +48,7 @@ class Routes extends Component {
                 }
                 
                 {/* Unprotected Routes */}
+                <Route exact path="/message/:event" component={ Messages } />
                 <Route path="/register" component={ Register } />
                 <Route path="/about" component={ About } />
                 <Route path="/logout" component={ LogOut } />
