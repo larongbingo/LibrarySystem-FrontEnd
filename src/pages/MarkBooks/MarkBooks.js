@@ -93,7 +93,13 @@ class MarkBooks extends Component {
         }
 
         return (
-            <h3>Loading...</h3>
+            <Grid>
+                <Row>
+                    <Col>
+                        <h3>Loading...</h3>
+                    </Col>
+                </Row>
+            </Grid>
         )
     }
 }
