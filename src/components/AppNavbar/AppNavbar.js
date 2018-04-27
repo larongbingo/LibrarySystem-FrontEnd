@@ -12,39 +12,19 @@ import CvSU_Logo from "./Cavite_State_University.png";
 
 import "./AppNavbar_Styles.css";
 
-class AppNavbar extends Component {
+class RightNavItems extends Component {
+  checkToken() {
+      return localStorage.getItem("hash");
+  }
 
-    checkToken() {
-        return localStorage.getItem("hash");
-    }
-
-    // TODO: change the list at BookCatalog to Flexbox
-    checkPosition() {
-      return localStorage.getItem("position");
-    }
+  // TODO: change the list at BookCatalog to Flexbox
+  checkPosition() {
+    return localStorage.getItem("position");
+  }
 
   render() {
     return (
-      <div className="App">
-        <Navbar fixedTop inverse collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <a href="/">
-                <Image className="logo" responsive src={CvSU_Logo} />
-              </a>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav>
-              <NavItem eventKey={1} href="/">Home</NavItem>
-              <NavDropdown title="Catalogs">
-                <MenuItem eventKey={2} href="/bookCatalog">Book Catalog</MenuItem>
-                <MenuItem eventKey={3} href="/dissertation">Dissertation Catalog</MenuItem>
-              </NavDropdown>
-              <NavItem eventKey={4} href="/about">About</NavItem>
-            </Nav>
-            <Nav pullRight>
+      <Nav pullRight>
               {
                 this.checkPosition() && this.checkToken() ?
                 <NavItem href="/uploadDissertation">Upload Thesis</NavItem> :
@@ -82,6 +62,33 @@ class AppNavbar extends Component {
                   <NavItem eventKey={2} href="/login">Log In</NavItem> 
               }
             </Nav>
+    )
+  }
+}
+
+class AppNavbar extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Navbar fixedTop inverse collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="/">
+                <Image className="logo" responsive src={CvSU_Logo} />
+              </a>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav>
+              <NavItem eventKey={1} href="/">Home</NavItem>
+              <NavDropdown title="Catalogs">
+                <MenuItem eventKey={2} href="/bookCatalog">Book Catalog</MenuItem>
+                <MenuItem eventKey={3} href="/dissertation">Dissertation Catalog</MenuItem>
+              </NavDropdown>
+              <NavItem eventKey={4} href="/about">About</NavItem>
+            </Nav>
+            <RightNavItems />
           </Navbar.Collapse>
         </Navbar>
       </div>

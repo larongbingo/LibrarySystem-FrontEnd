@@ -13,15 +13,42 @@ import BookStats from "./pages/BookStats/BookStats";
 import UpdateUsers from "./pages/UpdateUsers/UpdateUsers";
 import MarkBooks from "./pages/MarkBooks/MarkBooks";
 import UploadThesis from "./pages/UploadThesis";
+import Messages from "./pages/Message";
 
 class Routes extends Component {
+    checkToken() {
+        return localStorage.getItem("hash");
+    }
+
+    checkPosition() {
+        return localStorage.getItem("position");
+    }
+
     render() {
         return (
             <Switch>
-                <Route path="/uploadThesis" component={ UploadThesis } />
-                <Route path="/markBooks" component={ MarkBooks } />
-                <Route path="/updateUsers" component={ UpdateUsers } />
-                <Route path="/bookStats" component={ BookStats } />
+                {
+                    this.checkToken() ? 
+                    <Route path="/uploadDissertation" component={ UploadThesis } /> : ""
+                }
+
+                {
+                    this.checkToken() && this.checkPosition() === "ADMINISTRATOR" ?
+                    <Route path="/markBooks" component={ MarkBooks } /> : ""
+                }
+
+                {
+                    this.checkToken() && this.checkPosition() === "ADMINISTRATOR" ?
+                    <Route path="/updateUsers" component={ UpdateUsers } /> : ""
+                }
+
+                {
+                    this.checkToken() && this.checkPosition() === "ADMINISTRATOR" ?
+                    <Route path="/bookStats" component={ BookStats } /> : ""
+                }
+                
+                {/* Unprotected Routes */}
+                <Route exact path="/message/:event" component={ Messages } />
                 <Route path="/register" component={ Register } />
                 <Route path="/about" component={ About } />
                 <Route path="/logout" component={ LogOut } />
