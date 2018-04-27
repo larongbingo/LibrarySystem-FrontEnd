@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { Grid, Row, Col, Image } from "react-bootstrap";
+import { 
+    Grid, 
+    Row, 
+    Col, 
+    Image,
+    Button
+} from "react-bootstrap";
 
 import QuestionMark from "./question-512.png";
 
@@ -11,6 +17,9 @@ class BookDetails extends Component {
             bookId: this.props.match.params.bookId
         };
 
+        this.onReserveButtonClick = this.onReserveButtonClick.bind(this);
+        this.onBorrowButtonClick = this.onBorrowButtonClick.bind(this);
+
         fetch(`https://librarysystembackend.mybluemix.net/api?query=mutation+{updateViewCounter(bookId:${this.state.bookId})}`, {method: "POST"})
     }
 
@@ -21,6 +30,34 @@ class BookDetails extends Component {
         .then(data => {
             this.setState({bookDetails: data.data.Books[0]})
         });
+    }
+
+    checkToken() {
+        return localStorage.getItem("hash");
+    }
+
+    checkPosition() {
+        return localStorage.getItem("position");
+    }
+
+    onReserveButtonClick() {
+        let url = `https://librarysystembackend.mybluemix.net/api?query=mutation+{reserveBook(bookId:${this.state.bookId},token:"${this.checkToken()}")}`;
+        fetch(url, {method: "POST"})
+        .then(res => res.json())
+        .then(res => {
+            if(res.data.reserveBook.success) {
+                window.location.replace("/message/reserveSuccess");
+                return;
+            }
+
+            window.location.replace("/message/reserveFailed");
+        })
+    }
+
+    onBorrowButtonClick() {
+        // Go to MarkBooks/:id
+        window.location.replace(`/borrowBook/${this.state.bookId}`);
+        return;
     }
 
     render() {
@@ -39,7 +76,31 @@ class BookDetails extends Component {
                                 <h4>ISBN: {book.ISBN}</h4>
                                 <h4>Borrowed: { (book.isBorrowed) ? "Yes" : "No" }</h4>
                                 <h4>Reserved: { (book.userId) ? "Yes" : "No" }</h4>
-                                <p>Reserve buttons coming soon...</p>
+                                
+                                {
+                                    // Reserve book
+                                    this.checkToken() ? 
+                                    (
+                                        !book.userId ? 
+                                        <Button
+                                            bsStyle="success"
+                                            onClick={this.onReserveButtonClick} 
+                                        >Reserve</Button> :
+                                        "Book is currently reserved"
+                                    ) :
+                                    <p>Log In to reserve book</p>
+                                }
+                                <br />
+                                {
+                                    // Borrow Book
+                                    this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ? 
+                                    (   
+                                        !book.borrowed ? 
+                                        <Button onClick={this.onBorrowButtonClick}>Mark as Borrowed</Button> : // TODO: Build this as a Button
+                                        "" // Book is borrowed
+                                    ) :
+                                    "" // Has no token or not an admin or staff
+                                }
                             </div>
                         </Col>
                     </Row>

@@ -36,6 +36,18 @@ class Message extends Component {
                     <MessagePage message="File failed to upload, please try again." href="/" /> :
                     ""
                 }
+
+                {
+                    this.props.match.params.event === "reserveSuccess" ?
+                    <MessagePage message="Book successfully reserved" href="/" /> :
+                    ""
+                }
+
+                {
+                    this.props.match.params.event === "reserveFailed" ?
+                    <MessagePage message="Book failed to be reserved, try again later" href="/" /> :
+                    ""
+                }
             </Grid>
         )
     }
