@@ -45,13 +45,13 @@ class BorrowBook extends Component {
     }
 
     render() {
-        {
-            // Should display if the book is reserved
+        
+        // Should display if the book is reserved
 
-            // Expected Props
-            // id of the book
-            // list of students
-        }
+        // Expected Props
+        // id of the book
+        // list of students
+        
 
         if(this.state.data) {
             return (
