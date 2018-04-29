@@ -14,6 +14,7 @@ import UpdateUsers from "./pages/UpdateUsers/UpdateUsers";
 import MarkBooks from "./pages/MarkBooks/MarkBooks";
 import UploadThesis from "./pages/UploadThesis";
 import Messages from "./pages/Message";
+import BorrowBook from "./pages/BorrowBook";
 
 class Routes extends Component {
     checkToken() {
@@ -28,23 +29,33 @@ class Routes extends Component {
         return (
             <Switch>
                 {
+                    // Uploading File
                     this.checkToken() ? 
                     <Route path="/uploadDissertation" component={ UploadThesis } /> : ""
                 }
 
                 {
+                    // Mark Books thats reserved
                     this.checkToken() && this.checkPosition() === "ADMINISTRATOR" ?
                     <Route path="/markBooks" component={ MarkBooks } /> : ""
                 }
 
                 {
+                    // Update User Info
                     this.checkToken() && this.checkPosition() === "ADMINISTRATOR" ?
                     <Route path="/updateUsers" component={ UpdateUsers } /> : ""
                 }
 
                 {
+                    // Statistics of the books
                     this.checkToken() && this.checkPosition() === "ADMINISTRATOR" ?
                     <Route path="/bookStats" component={ BookStats } /> : ""
+                }
+
+                {
+                    // Individually mark books as borrowed or returned
+                    this.checkToken() && this.checkPosition() === "ADMINISTRATOR" ?
+                    <Route exact path="/borrowBook/:bookId" component={ BorrowBook } /> : ""
                 }
                 
                 {/* Unprotected Routes */}

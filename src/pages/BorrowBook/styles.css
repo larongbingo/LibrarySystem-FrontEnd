@@ -1,0 +1,9 @@
+.entry {
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.entry:hover {
+    background-color: rgba(110, 110, 110, 0.5);
+}
