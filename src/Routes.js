@@ -14,6 +14,8 @@ import UpdateUsers from "./pages/UpdateUsers/UpdateUsers";
 import MarkBooks from "./pages/MarkBooks/MarkBooks";
 import UploadThesis from "./pages/UploadThesis";
 import Messages from "./pages/Message";
+import BorrowBook from "./pages/BorrowBook";
+import ConfirmBookBorrow from "./pages/ConfirmBookBorrow";
 
 class Routes extends Component {
     checkToken() {
@@ -28,23 +30,39 @@ class Routes extends Component {
         return (
             <Switch>
                 {
+                    // Uploading File
                     this.checkToken() ? 
                     <Route path="/uploadDissertation" component={ UploadThesis } /> : ""
                 }
 
                 {
-                    this.checkToken() && this.checkPosition() === "ADMINISTRATOR" ?
+                    // Mark Books thats reserved
+                    this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
                     <Route path="/markBooks" component={ MarkBooks } /> : ""
                 }
 
                 {
+                    // Update User Info
                     this.checkToken() && this.checkPosition() === "ADMINISTRATOR" ?
                     <Route path="/updateUsers" component={ UpdateUsers } /> : ""
                 }
 
                 {
+                    // Statistics of the books
                     this.checkToken() && this.checkPosition() === "ADMINISTRATOR" ?
                     <Route path="/bookStats" component={ BookStats } /> : ""
+                }
+
+                {
+                    // Individually mark books as borrowed or returned
+                    this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
+                    <Route exact path="/borrowBook/:bookId" component={ BorrowBook } /> : ""
+                }
+
+                {
+                    // Confirm that the book will be borrowed by the user
+                    this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
+                    <Route exact path="/confirmBorrow/:userId/:bookId" component={ ConfirmBookBorrow } /> : ""
                 }
                 
                 {/* Unprotected Routes */}

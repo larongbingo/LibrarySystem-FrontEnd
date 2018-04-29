@@ -48,6 +48,16 @@ class Message extends Component {
                     <MessagePage message="Book failed to be reserved, try again later" href="/" /> :
                     ""
                 }
+
+                {
+                    this.props.match.params.event === "borrowSuccess" ?
+                    <MessagePage message="Book successfully borrowed" href="/" /> : ""
+                }
+
+                {
+                    this.props.match.params.event === "borrowFailed" ?
+                    <MessagePage message="Book failed to be borrowed" href="/" /> : ""
+                }
             </Grid>
         )
     }

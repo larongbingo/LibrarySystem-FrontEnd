@@ -57,11 +57,16 @@ class AppLogin extends Component {
         .then(response => {
             // if the request sends a success
             if(response.data.logIn.success) {
+                console.log(response);
+
                 // Store the hash
                 localStorage.setItem("hash", response.data.logIn.data.token);
 
                 // Store the position
                 localStorage.setItem("position", response.data.logIn.data.position);
+
+                // Store the user id
+                localStorage.setItem("id", response.data.logIn.data.id);
 
                 // Redirect to homepage
                 window.location.replace("/");

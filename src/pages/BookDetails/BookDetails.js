@@ -95,9 +95,9 @@ class BookDetails extends Component {
                                     // Borrow Book
                                     this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ? 
                                     (   
-                                        !book.borrowed ? 
+                                        !book.isBorrowed ? 
                                         <Button onClick={this.onBorrowButtonClick}>Mark as Borrowed</Button> : // TODO: Build this as a Button
-                                        "" // Book is borrowed
+                                        "Book is already borrowed to user " + book.userId // Book is borrowed
                                     ) :
                                     "" // Has no token or not an admin or staff
                                 }
