@@ -25,7 +25,13 @@ class BorrowBook extends Component {
         let url = `https://librarysystembackend.mybluemix.net/api?query={Books(id:${this.state.bookId}){title author} Users{id userID firstName lastName}}`;
         fetch(url)
         .then(res => res.json())
-        .then(res => this.setState({data: res.data}));
+        .then(res => {
+            this.setState({data: res.data});
+
+            if(res.data.Users[0].userID) {
+                window.location.replace(`/confirmBorrow/${res.data.Users[0].userID}/${this.state.bookId}`);
+            }
+        });
     }
 
     renderUser(user) {
