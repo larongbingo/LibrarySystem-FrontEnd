@@ -15,6 +15,7 @@ import MarkBooks from "./pages/MarkBooks/MarkBooks";
 import UploadThesis from "./pages/UploadThesis";
 import Messages from "./pages/Message";
 import BorrowBook from "./pages/BorrowBook";
+import ConfirmBookBorrow from "./pages/ConfirmBookBorrow";
 
 class Routes extends Component {
     checkToken() {
@@ -36,7 +37,7 @@ class Routes extends Component {
 
                 {
                     // Mark Books thats reserved
-                    this.checkToken() && this.checkPosition() === "ADMINISTRATOR" ?
+                    this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
                     <Route path="/markBooks" component={ MarkBooks } /> : ""
                 }
 
@@ -54,8 +55,14 @@ class Routes extends Component {
 
                 {
                     // Individually mark books as borrowed or returned
-                    this.checkToken() && this.checkPosition() === "ADMINISTRATOR" ?
+                    this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
                     <Route exact path="/borrowBook/:bookId" component={ BorrowBook } /> : ""
+                }
+
+                {
+                    // Confirm that the book will be borrowed by the user
+                    this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
+                    <Route exact path="/confirmBorrow/:userId/:bookId" component={ ConfirmBookBorrow } /> : ""
                 }
                 
                 {/* Unprotected Routes */}
