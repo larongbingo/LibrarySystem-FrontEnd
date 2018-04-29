@@ -45,6 +45,14 @@ class BorrowBook extends Component {
     }
 
     render() {
+        {
+            // Should display if the book is reserved
+
+            // Expected Props
+            // id of the book
+            // list of students
+        }
+
         if(this.state.data) {
             return (
                 <Grid>
@@ -71,14 +79,6 @@ class BorrowBook extends Component {
                 <Row>
                     <Col>
                         <h1>Loading...</h1>
-
-                        {
-                            // Should display if the book is reserved
-
-                            // Expected Props
-                            // id of the book
-                            // list of students
-                        }
                     </Col>
                 </Row>
             </Grid>
