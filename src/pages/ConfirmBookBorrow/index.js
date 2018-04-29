@@ -45,11 +45,11 @@ class ConfirmBookBorrow extends Component {
             console.log(url);
 
             if(res.data.borrowBook.success) {
-                //window.location.replace("/message/borrowSuccess");
+                window.location.replace("/message/borrowSuccess");
                 return;
             }
 
-            //window.location.replace("/message/borrowFailed");
+            window.location.replace("/message/borrowFailed");
         })
     }
 
