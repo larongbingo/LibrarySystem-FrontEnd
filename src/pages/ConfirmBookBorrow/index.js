@@ -24,7 +24,7 @@ class ConfirmBookBorrow extends Component {
     }
 
     componentDidMount() {
-        let url = `http://librarysystembackend.mybluemix.net/api?query={Books(id:${this.state.userId}){title author} Users(id:${this.state.bookId}){firstName lastName}}`;
+        let url = `http://librarysystembackend.mybluemix.net/api?query={Books(id:${this.state.bookId}){title author} Users(id:${this.state.userId}){firstName lastName}}`;
         fetch(url)
         .then(res => res.json())
         .then(res => this.setState({data: res.data}))
