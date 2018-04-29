@@ -24,14 +24,14 @@ class ConfirmBookBorrow extends Component {
     }
 
     componentDidMount() {
-        let url = `http://librarysystembackend.mybluemix.net/api?query={Books(id:${this.state.bookId}){title author} Users(id:${this.state.userId}){firstName lastName}}`;
+        let url = `https://librarysystembackend.mybluemix.net/api?query={Books(id:${this.state.bookId}){title author} Users(id:${this.state.userId}){firstName lastName}}`;
         fetch(url)
         .then(res => res.json())
         .then(res => this.setState({data: res.data}))
     }
 
     onYesClick() {
-        let url = `http://librarysystembackend.mybluemix.net/api?query=mutation+{borrowBook(
+        let url = `https://librarysystembackend.mybluemix.net/api?query=mutation+{borrowBook(
             userId:${this.state.userId},
             bookId:${this.state.bookId},
             token:"${localStorage.getItem("hash")}",
