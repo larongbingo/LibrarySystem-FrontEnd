@@ -28,7 +28,7 @@ class BorrowBook extends Component {
         .then(res => {
             this.setState({data: res.data});
 
-            if(res.data.Users[0].userID) {
+            if(res.data.Books[0].userID) {
                 window.location.replace(`/confirmBorrow/${res.data.Books[0].userId}/${this.state.bookId}`);
             }
         });
