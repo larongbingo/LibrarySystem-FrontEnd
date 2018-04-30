@@ -19,6 +19,7 @@ class BookDetails extends Component {
 
         this.onReserveButtonClick = this.onReserveButtonClick.bind(this);
         this.onBorrowButtonClick = this.onBorrowButtonClick.bind(this);
+        this.onReturnButtonClick = this.onReturnButtonClick.bind(this);
 
         fetch(`https://librarysystembackend.mybluemix.net/api?query=mutation+{updateViewCounter(bookId:${this.state.bookId})}`, {method: "POST"})
     }
@@ -61,7 +62,8 @@ class BookDetails extends Component {
     }
 
     onReturnButtonClick() {
-
+        window.location.replace(`/returnBook/${this.state.bookId}`);
+        return;
     }
 
     render() {
@@ -82,6 +84,7 @@ class BookDetails extends Component {
                                 <h4>Reserved: { (book.userId) ? "Yes" : "No" }</h4>
                                 
                                 {
+                                    // TODO: Cleanup the blocks
                                     // Reserve book
                                     this.checkToken() ? 
                                     (
