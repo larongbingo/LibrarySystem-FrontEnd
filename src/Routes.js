@@ -17,6 +17,7 @@ import UploadThesis from "./pages/UploadThesis";
 import Messages from "./pages/Message";
 import BorrowBook from "./pages/BorrowBook";
 import ConfirmBookBorrow from "./pages/ConfirmBookBorrow";
+import ReturnBook from "./pages/ReturnBook";
 //#endregion
 
 class Routes extends Component {
@@ -69,6 +70,12 @@ class Routes extends Component {
                     // Confirm that the book will be borrowed by the user
                     this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
                     <Route exact path="/confirmBorrow/:userId/:bookId" component={ ConfirmBookBorrow } /> : ""
+                }
+                
+                {
+                    // Return the book
+                    this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
+                    <Route exact path="/returnBook/:bookId" component={ ReturnBook } /> : ""
                 }
 
                 {
