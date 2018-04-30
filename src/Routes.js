@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
+//#region Page_Referencess
 import AppHomepage from "./pages/AppHomepage/AppHomepage";
 import BookCatalog from "./pages/BookCatalog/BookCatalog";
 import Dissertation from "./pages/Dissertation/Dissertation";
@@ -16,6 +17,7 @@ import UploadThesis from "./pages/UploadThesis";
 import Messages from "./pages/Message";
 import BorrowBook from "./pages/BorrowBook";
 import ConfirmBookBorrow from "./pages/ConfirmBookBorrow";
+//#endregion
 
 class Routes extends Component {
     checkToken() {
@@ -29,6 +31,10 @@ class Routes extends Component {
     render() {
         return (
             <Switch>
+                {
+                    //#region Protected_Routes
+                }
+                
                 {
                     // Uploading File
                     this.checkToken() ? 
@@ -64,8 +70,15 @@ class Routes extends Component {
                     this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
                     <Route exact path="/confirmBorrow/:userId/:bookId" component={ ConfirmBookBorrow } /> : ""
                 }
+
+                {
+                    //#endregion
+                }
                 
-                {/* Unprotected Routes */}
+                {
+                    //#region Unprotected_Regions
+                }
+
                 <Route exact path="/message/:event" component={ Messages } />
                 <Route path="/register" component={ Register } />
                 <Route path="/about" component={ About } />
@@ -77,6 +90,10 @@ class Routes extends Component {
                 <Route path="/dissertation/:dissertationName" component={ Dissertation } />
                 <Route path="/dissertation" component={ Dissertation } />
                 <Route path="/" component={ AppHomepage } />
+
+                {
+                    //#endregion
+                }
             </Switch>
         );
     }
