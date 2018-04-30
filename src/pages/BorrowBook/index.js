@@ -22,10 +22,16 @@ class BorrowBook extends Component {
     }
 
     componentDidMount() {
-        let url = `https://librarysystembackend.mybluemix.net/api?query={Books(id:${this.state.bookId}){title author} Users{id userID firstName lastName}}`;
+        let url = `https://librarysystembackend.mybluemix.net/api?query={Books(id:${this.state.bookId}){title author userId} Users{id userID firstName lastName}}`;
         fetch(url)
         .then(res => res.json())
-        .then(res => this.setState({data: res.data}));
+        .then(res => {
+            this.setState({data: res.data});
+
+            if(res.data.Books[0].userID) {
+                window.location.replace(`/confirmBorrow/${res.data.Books[0].userId}/${this.state.bookId}`);
+            }
+        });
     }
 
     renderUser(user) {
@@ -45,13 +51,13 @@ class BorrowBook extends Component {
     }
 
     render() {
-        {
-            // Should display if the book is reserved
+        
+        // Should display if the book is reserved
 
-            // Expected Props
-            // id of the book
-            // list of students
-        }
+        // Expected Props
+        // id of the book
+        // list of students
+        
 
         if(this.state.data) {
             return (
