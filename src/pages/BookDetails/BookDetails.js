@@ -60,6 +60,10 @@ class BookDetails extends Component {
         return;
     }
 
+    onReturnButtonClick() {
+
+    }
+
     render() {
         if(this.state.bookDetails) {
             let book = this.state.bookDetails;
@@ -86,7 +90,11 @@ class BookDetails extends Component {
                                             bsStyle="success"
                                             onClick={this.onReserveButtonClick} 
                                         >Reserve</Button> :
-                                        "Book is currently reserved"
+                                        (
+                                            !book.isBorrowed ?
+                                            "Book is currently reserved" :
+                                            ""
+                                        )
                                     ) :
                                     <p>Log In to reserve book</p>
                                 }
@@ -100,6 +108,17 @@ class BookDetails extends Component {
                                         "Book is already borrowed to user " + book.userId // Book is borrowed
                                     ) :
                                     "" // Has no token or not an admin or staff
+                                }
+                                <br />
+                                {
+                                    // Return Book
+                                    this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
+                                    (
+                                        book.isBorrowed && book.userId ? 
+                                        <Button onClick={this.onReturnButtonClick}>Mark as Returned</Button> :
+                                        ""
+                                    ) :
+                                    ""
                                 }
                             </div>
                         </Col>
