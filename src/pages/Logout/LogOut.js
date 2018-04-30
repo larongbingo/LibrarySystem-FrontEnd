@@ -13,6 +13,8 @@ class LogOut extends Component {
 
         // Remove the locally stored position
         localStorage.removeItem("position");
+
+        localStorage.removeItem("id");
     }
     
     render() {
