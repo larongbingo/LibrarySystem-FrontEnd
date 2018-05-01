@@ -20,6 +20,7 @@ class BookDetails extends Component {
         this.onReserveButtonClick = this.onReserveButtonClick.bind(this);
         this.onBorrowButtonClick = this.onBorrowButtonClick.bind(this);
         this.onReturnButtonClick = this.onReturnButtonClick.bind(this);
+        this.onCancelReservationButtonClick = this.onCancelReservationButtonClick.bind(this);
 
         fetch(`https://librarysystembackend.mybluemix.net/api?query=mutation+{updateViewCounter(bookId:${this.state.bookId})}`, {method: "POST"})
     }
@@ -41,11 +42,17 @@ class BookDetails extends Component {
         return localStorage.getItem("position");
     }
 
+    checkID() {
+        return localStorage.getItem("id");
+    }
+
     onReserveButtonClick() {
         let url = `https://librarysystembackend.mybluemix.net/api?query=mutation+{reserveBook(bookId:${this.state.bookId},token:"${this.checkToken()}")}`;
         fetch(url, {method: "POST"})
         .then(res => res.json())
         .then(res => {
+            console.log(res);
+
             if(res.data.reserveBook.success) {
                 window.location.replace("/message/reserveSuccess");
                 return;
@@ -53,6 +60,13 @@ class BookDetails extends Component {
 
             window.location.replace("/message/reserveFailed");
         })
+    }
+
+    onCancelReservationButtonClick() {
+        let url = `https://librarysystembackend.mybluemix.net/api?query=mutation+{unreserveBook(bookId:${this.state.bookId},token:"${this.checkToken()}")}`;
+        fetch(url, {method: "POST"})
+        .then(res => res.json())
+        .then(res => window.location.replace(`/book/${this.state.bookId}`))
     }
 
     onBorrowButtonClick() {
@@ -95,7 +109,12 @@ class BookDetails extends Component {
                                         >Reserve</Button> :
                                         (
                                             !book.isBorrowed ?
-                                            "Book is currently reserved" :
+                                            ( 
+                                                // Cancellation of Reservation
+                                                Number(this.checkID()) === book.userId ? 
+                                                <Button onClick={this.onCancelReservationButtonClick}>Cancel Reserve</Button> : 
+                                                "Book is currently reserved"
+                                            ) :
                                             ""
                                         )
                                     ) :
