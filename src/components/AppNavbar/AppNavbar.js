@@ -32,8 +32,8 @@ class RightNavItems extends Component {
               }
 
               {
-                this.checkPosition() !== "USER" && this.checkToken() ?
-                <NavDropdown title="Administration">
+                this.checkToken() ?
+                <NavDropdown title="Account">
                 {
                   (this.checkPosition() === "ADMINISTRATOR") ? 
                     <MenuItem href="/bookStats">Book Stats</MenuItem> :
