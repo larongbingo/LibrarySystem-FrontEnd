@@ -18,7 +18,6 @@ import Messages from "./pages/Message";
 import BorrowBook from "./pages/BorrowBook";
 import ConfirmBookBorrow from "./pages/ConfirmBookBorrow";
 import ReturnBook from "./pages/ReturnBook";
-import CancelReservation from "./pages/CancelReservation";
 //#endregion
 
 class Routes extends Component {
