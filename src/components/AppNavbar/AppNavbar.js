@@ -25,15 +25,17 @@ class RightNavItems extends Component {
   render() {
     return (
       <Nav pullRight>
-              {
-                this.checkPosition() && this.checkToken() ?
-                <NavItem href="/uploadDissertation">Upload Thesis</NavItem> :
-                ""
-              }
+              
 
               {
                 this.checkToken() ?
                 <NavDropdown title="Account">
+                {
+                  this.checkPosition() && this.checkToken() ?
+                  <NavItem href="/uploadDissertation">Upload Thesis</NavItem> :
+                  ""
+                }
+                
                 {
                   (this.checkPosition() === "ADMINISTRATOR") ? 
                     <MenuItem href="/bookStats">Book Stats</MenuItem> :
