@@ -80,12 +80,6 @@ class Routes extends Component {
                 }
 
                 {
-                    // Cancel Reservation
-                    this.checkToken() ? 
-                    <Route exact path="/cancelReservation/:bookId" component={ CancelReservation } /> : ""
-                }
-
-                {
                     //#endregion
                 }
                 
