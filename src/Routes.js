@@ -18,6 +18,7 @@ import Messages from "./pages/Message";
 import BorrowBook from "./pages/BorrowBook";
 import ConfirmBookBorrow from "./pages/ConfirmBookBorrow";
 import ReturnBook from "./pages/ReturnBook";
+import CancelReservation from "./pages/CancelReservation";
 //#endregion
 
 class Routes extends Component {
@@ -76,6 +77,12 @@ class Routes extends Component {
                     // Return the book
                     this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
                     <Route exact path="/returnBook/:bookId" component={ ReturnBook } /> : ""
+                }
+
+                {
+                    // Cancel Reservation
+                    this.checkToken() ? 
+                    <Route exact path="/cancelReservation/:bookId" component={ CancelReservation } /> : ""
                 }
 
                 {
