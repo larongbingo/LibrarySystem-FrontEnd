@@ -50,7 +50,7 @@ class RightNavItems extends Component {
 
                 {
                   (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
-                    <MenuItem href="/markBooks">Mark Books</MenuItem> :
+                    <MenuItem href="/markBooks">Book Status</MenuItem> :
                     ""
                 }
                 </NavDropdown> 
