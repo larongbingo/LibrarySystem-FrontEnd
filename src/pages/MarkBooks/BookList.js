@@ -4,17 +4,20 @@ import {
     Row,
     Col
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 // List of Books
 class BookList extends Component {
     renderBookEntry(book) {
         return (
-            <Row>
-                <Col>
-                    <h3>{book.title}</h3>
-                    <h5>{book.author}</h5>
-                </Col>
-            </Row>
+            <Link to={"/book/" + book.id}>
+                <Row>
+                    <Col>
+                        <h3>{book.title}</h3>
+                        <h5>{book.author}</h5>
+                    </Col>
+                </Row>
+            </Link>
         )
     } 
     
