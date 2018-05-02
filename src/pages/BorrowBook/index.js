@@ -26,9 +26,11 @@ class BorrowBook extends Component {
         fetch(url)
         .then(res => res.json())
         .then(res => {
+            console.log(res);
+
             this.setState({data: res.data});
 
-            if(res.data.Books[0].userID) {
+            if(res.data.Books[0].userId) {
                 window.location.replace(`/confirmBorrow/${res.data.Books[0].userId}/${this.state.bookId}`);
             }
         });
