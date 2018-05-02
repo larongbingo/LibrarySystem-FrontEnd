@@ -35,6 +35,12 @@ class RightNavItems extends Component {
                   <NavItem href="/uploadDissertation">Upload Thesis</NavItem> :
                   ""
                 }
+
+                {
+                  this.checkToken() ? 
+                  <MenuItem href="/booksMarkedOnAccount">Books on Account</MenuItem> :
+                  ""
+                }
                 
                 {
                   (this.checkPosition() === "ADMINISTRATOR") ? 
