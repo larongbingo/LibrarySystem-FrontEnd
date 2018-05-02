@@ -5,7 +5,7 @@ import {
     Col, 
     Well
 } from "react-bootstrap";
-import BookList from "./BookList";
+import BookList from "../../components/BookList";
 
 class MarkBooks extends Component {
     constructor(props, context) {
