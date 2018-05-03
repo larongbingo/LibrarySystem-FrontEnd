@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
+//#region Page_Referencess
 import AppHomepage from "./pages/AppHomepage/AppHomepage";
 import BookCatalog from "./pages/BookCatalog/BookCatalog";
 import Dissertation from "./pages/Dissertation/Dissertation";
@@ -16,6 +17,9 @@ import UploadThesis from "./pages/UploadThesis";
 import Messages from "./pages/Message";
 import BorrowBook from "./pages/BorrowBook";
 import ConfirmBookBorrow from "./pages/ConfirmBookBorrow";
+import ReturnBook from "./pages/ReturnBook";
+import BooksOnAccount from "./pages/BooksOnAccount";
+//#endregion
 
 class Routes extends Component {
     checkToken() {
@@ -29,6 +33,10 @@ class Routes extends Component {
     render() {
         return (
             <Switch>
+                {
+                    //#region Protected_Routes
+                }
+                
                 {
                     // Uploading File
                     this.checkToken() ? 
@@ -65,7 +73,26 @@ class Routes extends Component {
                     <Route exact path="/confirmBorrow/:userId/:bookId" component={ ConfirmBookBorrow } /> : ""
                 }
                 
-                {/* Unprotected Routes */}
+                {
+                    // Return the book
+                    this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
+                    <Route exact path="/returnBook/:bookId" component={ ReturnBook } /> : ""
+                }
+
+                {
+                    // Books that the current reserved or borrows
+                    this.checkToken() ? 
+                    <Route path="/booksMarkedOnAccount" component={ BooksOnAccount } /> : ""
+                }
+
+                {
+                    //#endregion
+                }
+                
+                {
+                    //#region Unprotected_Regions
+                }
+
                 <Route exact path="/message/:event" component={ Messages } />
                 <Route path="/register" component={ Register } />
                 <Route path="/about" component={ About } />
@@ -77,6 +104,10 @@ class Routes extends Component {
                 <Route path="/dissertation/:dissertationName" component={ Dissertation } />
                 <Route path="/dissertation" component={ Dissertation } />
                 <Route path="/" component={ AppHomepage } />
+
+                {
+                    //#endregion
+                }
             </Switch>
         );
     }

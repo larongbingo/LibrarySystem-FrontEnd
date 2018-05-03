@@ -25,15 +25,23 @@ class RightNavItems extends Component {
   render() {
     return (
       <Nav pullRight>
-              {
-                this.checkPosition() && this.checkToken() ?
-                <NavItem href="/uploadDissertation">Upload Thesis</NavItem> :
-                ""
-              }
+              
 
               {
-                this.checkPosition() !== "USER" && this.checkToken() ?
-                <NavDropdown title="Administration">
+                this.checkToken() ?
+                <NavDropdown title="Account">
+                {
+                  this.checkPosition() && this.checkToken() ?
+                  <NavItem href="/uploadDissertation">Upload Thesis</NavItem> :
+                  ""
+                }
+
+                {
+                  this.checkToken() ? 
+                  <MenuItem href="/booksMarkedOnAccount">Books on Account</MenuItem> :
+                  ""
+                }
+                
                 {
                   (this.checkPosition() === "ADMINISTRATOR") ? 
                     <MenuItem href="/bookStats">Book Stats</MenuItem> :
@@ -48,7 +56,7 @@ class RightNavItems extends Component {
 
                 {
                   (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
-                    <MenuItem href="/markBooks">Mark Books</MenuItem> :
+                    <MenuItem href="/markBooks">Book Status</MenuItem> :
                     ""
                 }
                 </NavDropdown> 

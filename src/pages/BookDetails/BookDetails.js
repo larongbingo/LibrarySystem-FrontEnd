@@ -19,6 +19,8 @@ class BookDetails extends Component {
 
         this.onReserveButtonClick = this.onReserveButtonClick.bind(this);
         this.onBorrowButtonClick = this.onBorrowButtonClick.bind(this);
+        this.onReturnButtonClick = this.onReturnButtonClick.bind(this);
+        this.onCancelReservationButtonClick = this.onCancelReservationButtonClick.bind(this);
 
         fetch(`https://librarysystembackend.mybluemix.net/api?query=mutation+{updateViewCounter(bookId:${this.state.bookId})}`, {method: "POST"})
     }
@@ -40,11 +42,17 @@ class BookDetails extends Component {
         return localStorage.getItem("position");
     }
 
+    checkID() {
+        return localStorage.getItem("id");
+    }
+
     onReserveButtonClick() {
         let url = `https://librarysystembackend.mybluemix.net/api?query=mutation+{reserveBook(bookId:${this.state.bookId},token:"${this.checkToken()}")}`;
         fetch(url, {method: "POST"})
         .then(res => res.json())
         .then(res => {
+            console.log(res);
+
             if(res.data.reserveBook.success) {
                 window.location.replace("/message/reserveSuccess");
                 return;
@@ -54,9 +62,21 @@ class BookDetails extends Component {
         })
     }
 
+    onCancelReservationButtonClick() {
+        let url = `https://librarysystembackend.mybluemix.net/api?query=mutation+{unreserveBook(bookId:${this.state.bookId},token:"${this.checkToken()}")}`;
+        fetch(url, {method: "POST"})
+        .then(res => res.json())
+        .then(res => window.location.replace(`/book/${this.state.bookId}`))
+    }
+
     onBorrowButtonClick() {
         // Go to MarkBooks/:id
         window.location.replace(`/borrowBook/${this.state.bookId}`);
+        return;
+    }
+
+    onReturnButtonClick() {
+        window.location.replace(`/returnBook/${this.state.bookId}`);
         return;
     }
 
@@ -78,6 +98,7 @@ class BookDetails extends Component {
                                 <h4>Reserved: { (book.userId) ? "Yes" : "No" }</h4>
                                 
                                 {
+                                    // TODO: Cleanup the blocks
                                     // Reserve book
                                     this.checkToken() ? 
                                     (
@@ -86,7 +107,16 @@ class BookDetails extends Component {
                                             bsStyle="success"
                                             onClick={this.onReserveButtonClick} 
                                         >Reserve</Button> :
-                                        "Book is currently reserved"
+                                        (
+                                            !book.isBorrowed ?
+                                            ( 
+                                                // Cancellation of Reservation
+                                                Number(this.checkID()) === book.userId ? 
+                                                <Button onClick={this.onCancelReservationButtonClick}>Cancel Reserve</Button> : 
+                                                "Book is currently reserved"
+                                            ) :
+                                            ""
+                                        )
                                     ) :
                                     <p>Log In to reserve book</p>
                                 }
@@ -100,6 +130,17 @@ class BookDetails extends Component {
                                         "Book is already borrowed to user " + book.userId // Book is borrowed
                                     ) :
                                     "" // Has no token or not an admin or staff
+                                }
+                                <br />
+                                {
+                                    // Return Book
+                                    this.checkToken() && (this.checkPosition() === "ADMINISTRATOR" || this.checkPosition() === "STAFF") ?
+                                    (
+                                        book.isBorrowed && book.userId ? 
+                                        <Button onClick={this.onReturnButtonClick}>Mark as Returned</Button> :
+                                        ""
+                                    ) :
+                                    ""
                                 }
                             </div>
                         </Col>
