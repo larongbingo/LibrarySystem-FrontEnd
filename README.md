@@ -13,5 +13,7 @@ Starts the server with the development environment enabled
 ## npm run build
 Builds the source to production ready package
 
-# Back End Link
-https://github.com/larongbingo/LibrarySystem-BackEnd
+# Project Links
+https://github.com/larongbingo/LibrarySystem-BackEnd - Account Auth and Processing
+https://github.com/larongbingo/php-buildpack - Buildpack for the IBM Cloud PHP Web App
+https://github.com/larongbingo/PHP-FileStoreToMySQL - Manages upload and download of files
